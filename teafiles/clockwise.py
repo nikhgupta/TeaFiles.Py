@@ -66,7 +66,7 @@ class DateTime:
     def __init__(self, year=1970, month=1, day=1, hours=0, minutes=0, seconds=0, milliseconds=0, ticks=None):
 
         if ticks:
-            self._ticks = long(ticks)
+            self._ticks = int(ticks)
         else:
             if year > 9999:
                 raise ValueError("Maximum value for year=9999")
@@ -169,7 +169,7 @@ class DateTime:
         '''
         if isinstance(other, DateTime):
             return self._ticks == other._ticks
-        if isinstance(other, long) or isinstance(other, int):
+        if isinstance(other, int) or isinstance(other, int):
             return self._ticks == other
         raise ValueError('comparison of date with invalid type')
 
@@ -310,7 +310,7 @@ class Duration:
             ticks += Duration.DAY * days
             ticks += 7 * Duration.DAY * weeks
 
-        self._ticks = long(ticks)   # ticks shall always be integers
+        self._ticks = int(ticks)   # ticks shall always be integers
 
     @property
     def ticks(self):
@@ -353,9 +353,9 @@ class Duration:
         '''
         if isinstance(other, Duration):
             return Duration(ticks=self._ticks + other._ticks)
-        elif isinstance(other, int) or isinstance(other, long):
+        elif isinstance(other, int):
             return Duration(ticks=self._ticks + other)
-        raise ValueError("Invalid operand: Can add only int, long or instances of Duration to Duration")
+        raise ValueError("Invalid operand: Can add only int or instances of Duration to Duration")
 
     def __eq__(self, other):
         '''
@@ -467,7 +467,7 @@ def isduration(value):
 
 
 # pimp range function
-from __builtin__ import range as _range
+from builtins import range as _range
 
 
 def range(*args):   # pylint:disable-msg=W0622

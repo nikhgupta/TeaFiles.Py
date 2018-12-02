@@ -569,7 +569,7 @@ def _getnamevaluekind(value):
         return _ValueKind.Int32
     if isinstance(value, float):
         return _ValueKind.Double
-    if isinstance(value, basestring):
+    if isinstance(value, str):
         return _ValueKind.Text
     if isinstance(value, uuid):
         return _ValueKind.Uuid
